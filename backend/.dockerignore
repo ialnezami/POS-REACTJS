@@ -8,19 +8,12 @@ dist
 .env.development
 .env.test
 .env.production
-README.md
 .vscode
 .idea
-*.md
 .DS_Store
 coverage
 .nyc_output
 test
 *.log
 .eslintcache
-.prettierrc
-.eslintrc.js
-tsconfig.json
-tsconfig.build.json
-jest.config.js
 
