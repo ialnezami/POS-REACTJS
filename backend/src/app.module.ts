@@ -5,6 +5,8 @@ import { DatabaseModule } from './modules/database/database.module';
 import { CacheModule } from './modules/cache/cache.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
+import { ProductsModule } from './modules/products/products.module';
+import { SalesModule } from './modules/sales/sales.module';
 import { AppController } from './app.controller';
 
 @Module({
@@ -28,6 +30,8 @@ import { AppController } from './app.controller';
     CacheModule,
     AuthModule,
     UsersModule,
+    ProductsModule,
+    SalesModule,
   ],
   controllers: [AppController],
 })
