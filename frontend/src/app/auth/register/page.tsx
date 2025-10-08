@@ -47,8 +47,9 @@ export default function RegisterPage() {
       setAuth(response);
       toast.success('Registration successful! Welcome to POS System.');
       router.push('/pos');
-    } catch {
-      toast.error('Registration failed. Please try again.');
+    } catch (error: any) {
+      const errorMessage = error?.response?.data?.message || 'Registration failed. Please try again.';
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }

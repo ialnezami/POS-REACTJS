@@ -25,7 +25,7 @@ export interface User {
 export interface LoginCredentials {
   email: string;
   password: string;
-  tenantId: string;
+  tenantId?: string; // Optional - will auto-detect user's tenant if not provided
 }
 
 export interface RegisterData {

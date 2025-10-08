@@ -17,7 +17,6 @@ import Link from 'next/link';
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
-  tenantId: z.string().min(1, 'Tenant ID is required'),
 });
 
 type LoginForm = z.infer<typeof loginSchema>;
@@ -32,7 +31,6 @@ export default function LoginPage() {
     defaultValues: {
       email: '',
       password: '',
-      tenantId: '',
     },
   });
 
@@ -43,8 +41,9 @@ export default function LoginPage() {
       setAuth(response);
       toast.success('Login successful!');
       router.push('/pos');
-    } catch {
-      toast.error('Login failed. Please try again.');
+    } catch (error: any) {
+      const errorMessage = error?.response?.data?.message || 'Login failed. Please check your credentials.';
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -82,20 +81,6 @@ export default function LoginPage() {
                     <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input type="password" placeholder="••••••••" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="tenantId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Tenant ID</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your tenant ID" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
