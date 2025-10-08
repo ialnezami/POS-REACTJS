@@ -50,11 +50,12 @@ export class UsersService {
     return user;
   }
 
-  async findByEmail(email: string, tenantId: string): Promise<User | null> {
-    return await this.userModel.findOne({
-      email,
-      tenantId: new Types.ObjectId(tenantId),
-    });
+  async findByEmail(email: string, tenantId?: string): Promise<User | null> {
+    const query: any = { email };
+    if (tenantId) {
+      query.tenantId = new Types.ObjectId(tenantId);
+    }
+    return await this.userModel.findOne(query);
   }
 
   async update(id: string, tenantId: string, updateUserDto: UpdateUserDto): Promise<User> {

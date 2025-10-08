@@ -16,9 +16,9 @@ Modern Cloud POS System backend API built with NestJS 10, MongoDB, and Redis.
 # Install dependencies
 npm install
 
-# Copy environment file
-cp .env.example .env
-# Edit .env with your configuration
+# Copy environment file template
+cp env.template .env
+# Edit .env with your configuration (especially JWT secrets for production)
 
 # Start the application
 npm run start:dev
@@ -70,10 +70,11 @@ Content-Type: application/json
 
 {
   "email": "admin@example.com",
-  "password": "SecurePass123!",
-  "tenantId": "507f1f77bcf86cd799439011"
+  "password": "SecurePass123!"
 }
 ```
+
+**Note:** `tenantId` is now optional. If not provided, the system will automatically find the user's tenant.
 
 ### Using Protected Endpoints
 

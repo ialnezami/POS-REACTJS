@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsString, IsMongoId } from 'class-validator';
+import { IsEmail, IsString, IsMongoId, IsOptional } from 'class-validator';
 
 export class LoginDto {
   @ApiProperty({ example: 'john.doe@example.com' })
@@ -10,9 +10,14 @@ export class LoginDto {
   @IsString()
   password: string;
 
-  @ApiProperty({ example: '507f1f77bcf86cd799439011' })
+  @ApiProperty({ 
+    example: '507f1f77bcf86cd799439011',
+    required: false,
+    description: 'Optional tenant ID. If not provided, will use the user\'s tenant.'
+  })
+  @IsOptional()
   @IsMongoId()
-  tenantId: string;
+  tenantId?: string;
 }
 
 

@@ -56,10 +56,11 @@ export class AuthService {
     const tokens = await this.generateTokens(user);
 
     // Store refresh token
-    await this.usersService.addRefreshToken(user._id.toString(), tokens.refreshToken);
+    const userId = (user._id as Types.ObjectId).toString();
+    await this.usersService.addRefreshToken(userId, tokens.refreshToken);
 
     // Update last login
-    await this.usersService.updateLastLogin(user._id.toString());
+    await this.usersService.updateLastLogin(userId);
 
     return {
       user: {
@@ -107,7 +108,7 @@ export class AuthService {
     }
   }
 
-  async validateUser(email: string, password: string, tenantId: string): Promise<any> {
+  async validateUser(email: string, password: string, tenantId?: string): Promise<any> {
     const user = await this.usersService.findByEmail(email, tenantId);
 
     if (!user) {
